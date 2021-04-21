@@ -35,6 +35,7 @@ const Product = ({ meta }) => {
             CT_ {meta.ct} ({meta.MinimumOrder})
           </Text>
           <Text>Size {meta.Size}</Text>
+          <Text>Size Adjustment - 2cm Available</Text>
           <Text>Material_{meta.Material}</Text>
         </VStack>
       </Flex>

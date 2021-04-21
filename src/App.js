@@ -7,6 +7,7 @@ import useQuery from './lib/hooks/useQuery';
 function App() {
   const products = useQuery();
 
+  console.log(products);
   return (
     <div>
       {/* header */}
