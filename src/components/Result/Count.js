@@ -1,7 +1,10 @@
-import { Text } from "@chakra-ui/layout";
+import { Text } from '@chakra-ui/layout';
+import { useSelector } from 'react-redux';
 
 const Count = () => {
-  return <Text>Result : 35</Text>;
+  const products = useSelector((state) => state.product.list);
+
+  return <Text>Result : {products.length}</Text>;
 };
 
 export default Count;

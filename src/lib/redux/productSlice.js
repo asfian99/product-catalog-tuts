@@ -21,10 +21,20 @@ export const productSlice = createSlice({
 
       state.category = uniqueArr;
     },
+    search: (state, action) => {
+      const keyword = action.payload;
+      let allList = [...state.allList];
+
+      const filteredProducts = allList.filter((item) => {
+        return item.ProductId.includes(keyword) || item.Name.includes(keyword);
+      });
+
+      state.list = filteredProducts;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addProducts, addCategory } = productSlice.actions;
+export const { addProducts, addCategory, search } = productSlice.actions;
 
 export default productSlice.reducer;
