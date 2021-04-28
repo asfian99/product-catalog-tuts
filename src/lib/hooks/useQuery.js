@@ -24,7 +24,7 @@ const useQuery = () => {
             })
           );
 
-          dispatch(addCategory(item.category));
+          dispatch(addCategory(item.Category));
           return 0;
         });
       },

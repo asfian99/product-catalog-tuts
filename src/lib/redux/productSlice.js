@@ -31,10 +31,18 @@ export const productSlice = createSlice({
 
       state.list = filteredProducts;
     },
+    filterProduct: (state, action) => {
+      state.list = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addProducts, addCategory, search } = productSlice.actions;
+export const {
+  addProducts,
+  addCategory,
+  search,
+  filterProduct,
+} = productSlice.actions;
 
 export default productSlice.reducer;
