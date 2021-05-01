@@ -39,8 +39,7 @@ export const productSlice = createSlice({
 
       let allList = [...state.allList];
       const filteredProducts = allList.filter((item) => {
-        // xx,xxxx
-        // xxxxxx
+        // xx,xxxx => xxxxxx
         const price = parseFloat(item.Price.replace(',', ''));
 
         return price >= min && price <= max;
