@@ -6,13 +6,31 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { filterPrice } from '../../lib/redux/productSlice';
 
 const PriceFilter = () => {
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(100000);
+  const dispach = useDispatch();
+
+  const handleMin = (e) => {
+    const value = e.target.value;
+    setMin(value);
+    dispach(filterPrice({ min: value, max }));
+  };
+  const handleMax = (e) => {
+    const value = e.target.value;
+    setMax(value);
+    dispach(filterPrice({ min, max: value }));
+  };
+
   return (
     <HStack w="40%">
-      <NumberInput>
-        <NumberInputField bg="white" value={0} />
+      <NumberInput defaultValue={0}>
+        <NumberInputField bg="white" value={min} onChange={handleMin} />
         <NumberInputStepper>
           <NumberIncrementStepper />
           <NumberDecrementStepper />
@@ -21,8 +39,8 @@ const PriceFilter = () => {
 
       <Heading fontSize="lg">~</Heading>
 
-      <NumberInput>
-        <NumberInputField bg="white" value={100000} />
+      <NumberInput defaultValue={100000}>
+        <NumberInputField bg="white" value={max} onChange={handleMax} />
         <NumberInputStepper>
           <NumberIncrementStepper />
           <NumberDecrementStepper />

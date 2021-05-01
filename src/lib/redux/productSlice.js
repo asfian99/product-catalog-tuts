@@ -34,6 +34,20 @@ export const productSlice = createSlice({
     filterProduct: (state, action) => {
       state.list = action.payload;
     },
+    filterPrice: (state, action) => {
+      const { min, max } = action.payload;
+
+      let allList = [...state.allList];
+      const filteredProducts = allList.filter((item) => {
+        // xx,xxxx
+        // xxxxxx
+        const price = parseFloat(item.Price.replace(',', ''));
+
+        return price >= min && price <= max;
+      });
+
+      state.list = filteredProducts;
+    },
   },
 });
 
@@ -43,6 +57,7 @@ export const {
   addCategory,
   search,
   filterProduct,
+  filterPrice,
 } = productSlice.actions;
 
 export default productSlice.reducer;
