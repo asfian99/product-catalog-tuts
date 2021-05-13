@@ -1,8 +1,34 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Flex, Heading, Image, VStack, Text } from '@chakra-ui/react';
 import Selection from './Product/Selection';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToPrint, removeFromPrint } from '../../lib/redux/productSlice';
 
 const Product = ({ meta }) => {
+  const dispatch = useDispatch();
+  const selectedList = useSelector((state) => state.product.printItems);
+  const allProducts = useSelector((state) => state.product.allList);
+
+  const index = allProducts.findIndex(
+    (item) => item.ProductId === meta.ProductId
+  );
+
+  const [selectStatus, setSelectStatus] = useState(allProducts[index].selected);
+
+  useEffect(() => {
+    if (selectedList.length === 0) {
+      setSelectStatus(false);
+    }
+    setSelectStatus(allProducts[index].selected);
+  }, [selectedList, selectStatus, setSelectStatus, allProducts, index]);
+
+  const selectHandler = () => {
+    if (!selectStatus) dispatch(addToPrint(meta));
+    if (selectStatus) dispatch(removeFromPrint(meta));
+
+    setSelectStatus(!selectStatus);
+  };
+
   return (
     <Flex
       h="full"
@@ -11,7 +37,7 @@ const Product = ({ meta }) => {
       borderColor="gray.300"
       borderRadius="xl"
     >
-      <Selection />
+      <Selection selectStatus={selectStatus} selectHandler={selectHandler} />
       <Image
         src={meta.Image}
         borderTopRadius="lg"

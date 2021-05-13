@@ -47,6 +47,42 @@ export const productSlice = createSlice({
 
       state.list = filteredProducts;
     },
+    addToPrint: (state, action) => {
+      const allList = [...state.allList];
+      const product = action.payload;
+
+      const index = allList.findIndex(
+        (item) => item.ProductId === product.ProductId
+      );
+      allList[index].selected = true;
+
+      state.allList = allList;
+      state.printItems.push(product);
+    },
+    removeFromPrint: (state, action) => {
+      const allList = [...state.allList];
+      const product = action.payload;
+
+      const index = allList.findIndex(
+        (item) => item.ProductId === product.ProductId
+      );
+      allList[index].selected = false;
+
+      const newPrintList = state.printItems.filter(
+        (item) => item.ProductId !== product.ProductId
+      );
+
+      state.allList = allList;
+      state.printItems = newPrintList;
+    },
+    ClearPrintList: (state, action) => {
+      const allList = [...state.allList];
+
+      allList.forEach((item) => (item.selected = false));
+
+      state.allList = allList;
+      state.printItems = [];
+    },
   },
 });
 
@@ -57,6 +93,9 @@ export const {
   search,
   filterProduct,
   filterPrice,
+  addToPrint,
+  removeFromPrint,
+  ClearPrintList,
 } = productSlice.actions;
 
 export default productSlice.reducer;

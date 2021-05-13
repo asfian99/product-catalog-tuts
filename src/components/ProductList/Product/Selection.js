@@ -1,7 +1,7 @@
-import { Button } from "@chakra-ui/button";
-import React from "react";
+import { Button } from '@chakra-ui/button';
+import React from 'react';
 
-const Selection = () => {
+const Selection = ({ selectStatus, selectHandler }) => {
   return (
     <Button
       pos="absolute"
@@ -10,11 +10,13 @@ const Selection = () => {
       ml="2"
       mt="2"
       colorScheme="blue"
-      bg="blue.500"
+      bg={selectStatus ? 'blue.800' : 'blue.300'}
+      variant={selectStatus ? 'solid' : 'outline'}
       size="sm"
       fontSize="md"
       opacity="40%"
-      _hover={{ opacity: "100%" }}
+      _hover={{ opacity: '100%' }}
+      onClick={() => selectHandler()}
     ></Button>
   );
 };

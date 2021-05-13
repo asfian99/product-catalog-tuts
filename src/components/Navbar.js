@@ -1,8 +1,9 @@
-import { Box, Container, Flex } from "@chakra-ui/layout";
-import Category from "./Navbar/Category";
-import PriceFilter from "./Navbar/PriceFilter";
-import PrintButton from "./Navbar/PrintButton";
-import Search from "./Navbar/Search";
+import { Box, Container, Flex } from '@chakra-ui/layout';
+import Category from './Navbar/Category';
+import PriceFilter from './Navbar/PriceFilter';
+import PrintButton from './Navbar/PrintButton';
+import Search from './Navbar/Search';
+import ClearAll from './Navbar/ClearAll';
 
 const Navbar = () => {
   return (
@@ -20,6 +21,7 @@ const Navbar = () => {
             </Flex>
 
             <Box>
+              <ClearAll />
               {/* Print button */}
               <PrintButton />
             </Box>
